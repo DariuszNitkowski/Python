@@ -6,7 +6,6 @@ import os
 import shutil
 
 
-
 shutil.copyfile("game.bmp", "game1.bmp") # zaczynam od zabepieczenia źródłowego pliku zeby nastepne uruchomienie było z czystą kartka
 class Krzywa():
     pygame.init()
