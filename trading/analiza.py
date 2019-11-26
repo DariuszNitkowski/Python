@@ -6,7 +6,7 @@ class Analiza():
         self.dane=pd.DataFrame()
         self.dane=pd.read_csv(nazwa_pliku, index_col="data")
         self.dane.columns=self.dane.columns.str.strip() #zabiera białe znaki z nagłówków
-        self.dane["rodzaj trejdu"]=self.dane["rodzaj trejdu"].str.strip() # zabiera białe znaki z danych tabeli
+        self.dane["rodzaj"]=self.dane["rodzaj"].str.strip() # zabiera białe znaki z danych tabeli
         self.dane["narastajaco"]=""
         self.dane["zysk pkt"]=""
         self.dane.iloc[0,4]=0
@@ -22,14 +22,20 @@ class Analiza():
             dane.iloc[i,4]=dane.iloc[i,2]/dane.iloc[i,0]
 
 
-    def rodzaj(self, od, do, rodzaj_trejdu): # to definicja do wyciągania, filtorwania
+    def rodzaj(self, od, do, rodzaje_trejdu): # to definicja do wyciągania, filtorwania
         dane=self.dane
-        okres=dane.loc[od:do]
-        if rodzaj_trejdu=="a":
+        ciag=""
+        okres = dane.loc[od:do]
+
+        if "a" in rodzaje_trejdu:
             return okres
-        elif rodzaj_trejdu in ["m","d","k","on","s"]:
-            f=okres["rodzaj trejdu"]==rodzaj_trejdu
-            return(okres[f])
+        else:
+            for i, value in enumerate(rodzaje_trejdu):
+                exec("a%s=okres['rodzaj'] == value"%(i))
+                zmienna="a{}".format(i)+"|"
+                ciag=ciag+zmienna
+            ciag=ciag[:-1]
+            return okres[eval(ciag)]
 
     @classmethod
     def rysuj(cls, zbior, kolumna):
@@ -44,12 +50,17 @@ class Analiza():
 if __name__=="__main__":
     start=Analiza("baza.csv")
 
+
+
 #_____________________________________________________________________
 badany_okres_od=02.01   # miesiac.dzien
 badany_okres_do=09.09   # miesiac.dzien
-rodzaj_trejdu="a"   # m,k,d,on,s, a (dla all)
+rodzaje_trejdu=["a"]   # m,k,d,on,s,
 kolumna="wynik"     #wynik, narastajaco, zysk_pkt
-zbior=(Analiza.rodzaj(start,badany_okres_od,badany_okres_do, rodzaj_trejdu))
+zbior=(Analiza.rodzaj(start,badany_okres_od,badany_okres_do, rodzaje_trejdu))
+print(zbior)
+
+#
 #print(zbior)
 #rysuj=Analiza.rysuj(zbior,kolumna)
 #suma=Analiza.suma(zbior)
