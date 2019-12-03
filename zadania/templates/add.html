@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodawanie książki</title>
+    <style type="text/css">
+    *{
+        padding:0px;
+        margins:0px;
+        }
+    body{
+        position: relative;
+        width:1104;
+        background-color: black;
+    }
+
+
+    #kontener{
+        position: absolute;
+        width:800px;
+        height:500px;
+        margin:50px 20px 20px 50px;
+        text-align:justify;
+        line-height:30px;
+        background-color: rgb(204, 230, 255);
+        border:solid black;
+        font-size:30px;
+        }
+
+    #formularz{
+        margin-left:30px;
+        margin-top:20px;
+        }
+
+    input.rubryka{
+        position:absolute;
+        color:black;
+        margin-left:350px;
+        margin-top:-30px;
+        font-size:25px;
+        margin:right;
+        width:400px;
+        }
+
+    #submit{
+
+        background-color: white;
+        font-size:30px;
+        float:right;
+        margin-right:10px;
+        padding:10px;
+        length:100px;
+        }
+    #submit:hover{
+        background:rgb(204, 230, 255);
+        }
+    a:link, a:visited{
+        position:absolute;
+        font-size:30px;
+        margin-left:50px;
+        margin-top:10px;
+        text-decoration: none;
+        color:white;
+        }
+
+    a:hover, a:active{
+        color: rgb(204, 230, 255);
+        }
+    #błąd{
+        position:absolute;
+        color:white;
+        margin-left:860px;
+        margin-top:80px;
+        line-height:px;
+        font-size:20px;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="/">Powrót do strony głównej</a>
+<div id="kontener">
+    <form id="formularz" action="/addresult" method="post">
+    <label>Tytuł książki</label><br/>
+    <input class="rubryka" required="required" minlength="2" type="text" name="Tytuł"><br/>
+    <label>Autorzy książki</label><br/>
+    <input class="rubryka" required="required" minlength="2" type="text" name="Autor"><br/>
+    <label>Data wydania rrrr-mm-dd</label><br/>
+    <input class="rubryka" required="required" minlength="2" type="date" name="Data"><br/>
+    <label>Nr ISBN</label><br/>
+    <input class="rubryka" required="required" minlength="10" maxlength="13" type="number" min="1" name="ISBN"><br/>
+    <label>Ilość stron</label><br/>
+    <input class="rubryka" style="width:100px;" required="required" type="number" min="1" name="Stron"><br/>
+    <label>Link do okładki</label><br/>
+    <input class="rubryka" type="text" required="required" minlength="5" name="LinkOkladki"><br/>
+    <label>Język wydania</label><br/>
+    <input class="rubryka" style="width:40px;" required="required" minlength="2" maxlength="2" pattern="[a-z]{2}" type="text" name="Język">
+    <input id="submit" type="submit" value="Dodaj">
+</form>
+
+    </div>
+<div id="błąd">
+          {% for i in bledy %}
+          {{i}}</br></br>
+
+          {% endfor %}
+
+      </div>
+</body>
+</html>
+

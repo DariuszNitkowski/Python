@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="author" content="Nitkowski" />
+
+
+    <title>Biblioteka-Strona główna</title>
+
+<style type="text/css">
+    *{
+        padding: 0;
+        margin:0;
+    }
+    #kontener{
+        width: 1104px;
+        border: 2px;
+        margin-left: 50px;
+
+    }
+    #menu{
+        position:relative;
+        background-color: rgb(128, 159, 255);
+        width: 1080px;
+        height: 70px;
+        margin-left: 22px;
+
+
+    }
+
+    a:link, a:visited
+    {
+        color: yellow;
+        font-size:15px;
+        text-decoration: none;
+
+
+
+    }
+    a:hover, a:active
+    {
+        color: rgb(230, 230, 0);
+        text-decoration: none;
+
+    }
+    p
+    {
+        color: black;
+        font-size:30px;
+        align:middle;
+        padding:10px;
+
+
+    }
+    th:tr{
+        color: blue;
+
+    }
+    tr:nth-of-type(2n+1){
+        border: 1px solid black;
+        background-color: rgba(150, 150, 150, 0.5);
+
+    }
+
+    td{
+        padding: 8px 8px;
+        border: 1px solid black;
+    }
+
+
+    /* !-- "Wyszukiwanie autora (wcisnij 1), Tytułu (2), Języka(3), dat publikacji(4) */
+</style>
+  </head>
+  <body>
+  <div id="kontener">
+  <div id="menu">
+
+      <p>Wynik wyszukiwania</p>
+      <a href="/">Wróć do głównej biblioteki</a>
+
+  </div>
+      <!-- koniec menu-->
+  <div id="main">
+  <table style="margin-left: 20px; width:1084px;">
+
+    <th>
+        <tr style="color: black;">
+        <td>Tytuł</td>
+        <td>Autorzy</td>
+            <td>Data publikacji</td>
+            <td>Nr. ISBN</td>
+            <td>Ilość stron</td>
+            <td>Język</td>
+            <td>Okładka</td>
+</tr>
+    </th>
+
+    {% for i in wynik %}
+
+<tr>
+
+    <td>{{i.Tytuł}}</td>
+    <td>{{i.Autorzy}}</td>
+    <td>{{i.DataPublikacji}}</td>
+    <td>{{i.ISBN}}</td>
+    <td>{{i.IloStron}} stron</td>
+    <td>{{i.Język}}</td>
+    <td><img src="{{i.Okładka}}"></td>
+
+{%endfor%}
+
+</tr>
+
+</table>
+      </div>
+      <div id="błąd">
+          {% for i in bledy %}
+          {{i}}</br>
+
+          {% endfor %}
+
+      </div>
+      <!-- koniec main-->
+  <div id="stopka">
+
+  </div>
+      <!-- koniec stopki-->
+      </div>
+  <!-- koniec kontenera-->
+  </body>
+</html>
